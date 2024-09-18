@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace HuquqApi.Migrations
+namespace HuquqApi.Data.Migrations
 {
     [DbContext(typeof(HuquqDbContext))]
-    [Migration("20240917085141_AddQuestionLimitFields")]
-    partial class AddQuestionLimitFields
+    [Migration("20240918221609_initi")]
+    partial class initi
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -104,8 +104,16 @@ namespace HuquqApi.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsPremium")
                         .HasColumnType("bit");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("LastQuestionDate")
                         .HasColumnType("datetime2");
@@ -140,6 +148,9 @@ namespace HuquqApi.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("RequestCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RequestCountTime")
                         .HasColumnType("int");
 
                     b.Property<string>("SecurityStamp")

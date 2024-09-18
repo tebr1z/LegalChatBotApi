@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace HuquqApi.Migrations
+namespace HuquqApi.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Intialz : Migration
+    public partial class initi : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,9 +30,14 @@ namespace HuquqApi.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsPremium = table.Column<bool>(type: "bit", nullable: false),
                     PremiumExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     RequestCount = table.Column<int>(type: "int", nullable: false),
+                    RequestCountTime = table.Column<int>(type: "int", nullable: false),
+                    MonthlyQuestionCount = table.Column<int>(type: "int", nullable: false),
+                    LastQuestionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),

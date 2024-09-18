@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace HuquqApi.Migrations
+namespace HuquqApi.Data.Migrations
 {
     [DbContext(typeof(HuquqDbContext))]
-    [Migration("20240916232640_Intialz")]
-    partial class Intialz
+    [Migration("20240918222550_SeedDataRole")]
+    partial class SeedDataRole
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -104,14 +104,28 @@ namespace HuquqApi.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsPremium")
                         .HasColumnType("bit");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastQuestionDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<int>("MonthlyQuestionCount")
+                        .HasColumnType("int");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -136,6 +150,9 @@ namespace HuquqApi.Migrations
                     b.Property<int>("RequestCount")
                         .HasColumnType("int");
 
+                    b.Property<int>("RequestCountTime")
+                        .HasColumnType("int");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -157,6 +174,54 @@ namespace HuquqApi.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "b26ae5d7-59df-49ee-b05c-d639f7a9eda2",
+                            Email = "hasimovtabriz@gmail.com",
+                            EmailConfirmed = true,
+                            FullName = "Tabriz ",
+                            IsPremium = false,
+                            LastName = "Hashimov",
+                            LastQuestionDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LockoutEnabled = false,
+                            MonthlyQuestionCount = 0,
+                            NormalizedEmail = "HASIMOVTABRIZ@GMAIL.COM",
+                            NormalizedUserName = "ADMINUSER",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOvgfhzs4V3TUW2SpnZAp92F8x5oazYT36n4sen5kU/lH/j+1ZBUZ+J+sVqL/RRuqw==",
+                            PhoneNumberConfirmed = false,
+                            RequestCount = 0,
+                            RequestCountTime = 0,
+                            SecurityStamp = "0c8cf2e2-0d61-416d-9d43-8cffa891fcba",
+                            TwoFactorEnabled = false,
+                            UserName = "tabriz"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "a4ea24fc-5912-4008-957e-0138b6415dd8",
+                            Email = "tebitebo2001@gmail.com",
+                            EmailConfirmed = true,
+                            FullName = "Admin",
+                            IsPremium = false,
+                            LastName = "User",
+                            LastQuestionDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LockoutEnabled = false,
+                            MonthlyQuestionCount = 0,
+                            NormalizedEmail = "TEBITEBO2001@GMAIL.COM",
+                            NormalizedUserName = "ADMINUSER1",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBdaAO/bSrPYgWoetdudnWc8n0eJMQjuXL5n32GH+xTuzWd3/sWc6ZanRlUwjGR32g==",
+                            PhoneNumberConfirmed = false,
+                            RequestCount = 0,
+                            RequestCountTime = 0,
+                            SecurityStamp = "29d5c1e6-5771-4a68-8b57-4fb406c415d4",
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -184,6 +249,26 @@ namespace HuquqApi.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "3",
+                            Name = "Super-User",
+                            NormalizedName = "SUPER-USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -271,6 +356,18 @@ namespace HuquqApi.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "1",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            UserId = "2",
+                            RoleId = "2"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
