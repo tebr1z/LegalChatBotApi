@@ -1,15 +1,24 @@
 ﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+
+using System.ComponentModel.DataAnnotations;
 
 namespace HuquqApi.Dtos.UserDtos
 {
     public class RegisterDto
     {
-        
-        public string FullName { get; set; }
-        public string UserName { get; set; }
-        public string Email { get; set; }
+        [Required]
 
+        public string FullName { get; set; }
+        [Required]
+        public string LastName { get; set; }
+        [Required]
+        public string UserName { get; set; }
+        [Required]
+        public string Email { get; set; }
+        [Required]
         public string Password { get; set; }
+        [Required]
         public string RePassword { get; set; }
 
     }
@@ -20,8 +29,13 @@ namespace HuquqApi.Dtos.UserDtos
             RuleFor(r => r.FullName)
                     .NotEmpty()
                     .MaximumLength(30);
+            RuleFor(r => r.LastName)
+                   .NotEmpty()
+                   .MaximumLength(30);
+
+
             RuleFor(r => r.UserName)
-        .NotNull()
+        .NotEmpty()
         .MaximumLength(30)
         .MinimumLength(3);
             RuleFor(r => r.Email)
@@ -40,17 +54,17 @@ namespace HuquqApi.Dtos.UserDtos
                .MinimumLength(6)
                .MaximumLength(30);
 
-            RuleFor(r => r)
-               .Custom((r, context) =>
-               {
 
-                   if (r.Password != r.RePassword)
-                   {
-                       context.AddFailure("Password", "does not mach..");
-                   
-                   }
+            RuleFor(r => r.Password)
+                .Custom((password, context) =>
+                {
+                    var rePassword = context.InstanceToValidate.RePassword;
 
-               });
+                    if (password != rePassword)
+                    {
+                        context.AddFailure("Password", "Password and confirmation password do not match.");
+                    }
+                });
         }
     }
 }

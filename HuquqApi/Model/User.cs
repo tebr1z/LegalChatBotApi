@@ -17,6 +17,7 @@ namespace HuquqApi.Model
 
         public int MonthlyQuestionCount { get; set; }
         public DateTime LastQuestionDate { get; set; }
+        public List<Chat> Chats { get; set; }
     }
 
 }

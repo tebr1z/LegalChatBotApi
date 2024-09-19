@@ -1,4 +1,5 @@
 using HuquqApi;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.Register(builder.Configuration);

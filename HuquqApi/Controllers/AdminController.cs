@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 
 [Route("api/admin")]
 [ApiController]
+[Authorize]
+
 public class AdminController : ControllerBase
 {
     private readonly UserManager<User> _userManager;

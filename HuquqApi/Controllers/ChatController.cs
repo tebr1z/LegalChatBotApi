@@ -11,11 +11,12 @@ using System.Threading.Tasks;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class ChatController : ControllerBase
 {
     private readonly UserManager<User> _userManager;
     private readonly ChatService _chatService;
-    private readonly HuquqDbContext _dbContext; // Veritabanı bağlantısı için
+    private readonly HuquqDbContext _dbContext; 
     private readonly string _pdfContent;
     public ChatController(UserManager<User> userManager, ChatService chatService, HuquqDbContext dbContext)
     {
