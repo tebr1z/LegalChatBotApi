@@ -10,6 +10,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Security.Claims;
 using Microsoft.OpenApi.Models;
+using HuquqApi.Service.Interfaces;
+using HuquqApi.Service.Implementations;
+using HuquqApi.Settings;
 
 namespace HuquqApi
 {
@@ -44,6 +47,7 @@ namespace HuquqApi
                 opt.Password.RequireDigit = true;
                 opt.User.RequireUniqueEmail = true;
                 opt.Lockout.AllowedForNewUsers = true;
+                opt.SignIn.RequireConfirmedEmail = true;
                 opt.Lockout.MaxFailedAccessAttempts = 3;
                 opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
 
@@ -67,7 +71,7 @@ namespace HuquqApi
                     ValidIssuer = configuration["Jwt:Issuer"],
                     ValidAudience = configuration["Jwt:Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:SecretKey"])),
-                    ClockSkew=TimeSpan.Zero
+                    ClockSkew = TimeSpan.Zero
                 };
             });
 
@@ -101,21 +105,12 @@ namespace HuquqApi
     });
             });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IEmailService, EmailService>();
+
+            services.Configure<JwtSetting>(configuration.GetSection("Jwt"));
         }
     }
 }

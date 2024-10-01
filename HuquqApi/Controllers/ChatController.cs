@@ -1,13 +1,8 @@
-﻿using Azure;
-using HuquqApi.Model;
+﻿using HuquqApi.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -280,6 +275,30 @@ public class ChatController : ControllerBase
     }
 
 
+    [HttpGet("get-messages/{chatId}")]
+    public async Task<IActionResult> GetMessages(int chatId)
+    {
+        var chat = await _dbContext.Chats
+            .Include(c => c.Messages)
+            .FirstOrDefaultAsync(c => c.Id == chatId);
+
+        if (chat == null)
+        {
+            return NotFound("Chat bulunamadı.");
+        }
+
+        var messages = chat.Messages
+            .Select(m => new
+            {
+                m.Content,
+                m.Role,
+                m.SentAt
+            })
+            .OrderBy(m => m.SentAt)
+            .ToList();
+
+        return Ok(messages);
+    }
 
 
     public class CreateChatRequest

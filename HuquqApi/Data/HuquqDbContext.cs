@@ -13,8 +13,8 @@ public class HuquqDbContext : IdentityDbContext<User>
     public DbSet<Chat> Chats { get; set; }
     public DbSet<Message> Messages { get; set; }
     public DbSet<User> Users { get; set; }
-
-
+    public DbSet<ContactForm> contactForms { get; set; }
+    public DbSet<Setting> Settings { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         

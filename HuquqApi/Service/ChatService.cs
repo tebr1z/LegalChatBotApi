@@ -9,7 +9,7 @@ public class ChatService
 
     public ChatService()
     {
-        _apiKey = "Burada Api Key Olacaq"; 
+        _apiKey = ""; 
     }
 
     public async Task<string> SendMessageToChatGPTAsync(string question, string pdfContent)

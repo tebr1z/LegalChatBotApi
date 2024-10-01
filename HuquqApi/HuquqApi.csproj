@@ -28,4 +28,8 @@
     <Folder Include="Pages\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\template\otpTemplate.html" />
+  </ItemGroup>
+
 </Project>

@@ -1,5 +1,4 @@
-﻿
-public class UserStatusService : BackgroundService
+﻿public class UserStatusService : BackgroundService
 {
     private readonly IServiceProvider _serviceProvider;
     private readonly ILogger<UserStatusService> _logger;
@@ -20,6 +19,10 @@ public class UserStatusService : BackgroundService
                 {
                     var dbContext = scope.ServiceProvider.GetRequiredService<HuquqDbContext>();
 
+                    // Get dynamic RequestCount value from settings
+                    var requestCountSetting = dbContext.Settings.FirstOrDefault(s => s.Key == "RequestCount");
+                    int dynamicRequestCount = requestCountSetting != null ? int.Parse(requestCountSetting.Value) : 10;
+
                     // Get all users
                     var users = dbContext.Users.ToList();
 
@@ -28,9 +31,9 @@ public class UserStatusService : BackgroundService
                         // Check and reset RequestCount every 24 hours
                         if (!user.IsPremium)
                         {
-                            if ((DateTime.Now - user.LastQuestionDate).TotalHours >= 24)
+                            if ((DateTime.Now - user.LastQuestionDate).TotalMinutes >= 1440)
                             {
-                                user.RequestCount = 10; // Reset to 10
+                                user.RequestCount = dynamicRequestCount; // Set to dynamic value
                                 user.LastQuestionDate = DateTime.Now;
                             }
                         }

@@ -16,8 +16,12 @@ namespace HuquqApi.Model
         public int RequestCountTime { get; set; }
 
         public int MonthlyQuestionCount { get; set; }
+
         public DateTime LastQuestionDate { get; set; }
         public List<Chat> Chats { get; set; }
+        public string? ResetPasswordOtp { get; set; }
+        public DateTime? OtpExpiryTime { get; set; }
+
     }
 
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HuquqApi.Data.Migrations
 {
     [DbContext(typeof(HuquqDbContext))]
-    partial class HuquqDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240920152330_Settings")]
+    partial class Settings
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -192,9 +195,6 @@ namespace HuquqApi.Data.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<DateTime?>("OtpExpiryTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
@@ -212,9 +212,6 @@ namespace HuquqApi.Data.Migrations
 
                     b.Property<int>("RequestCountTime")
                         .HasColumnType("int");
-
-                    b.Property<string>("ResetPasswordOtp")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -243,7 +240,7 @@ namespace HuquqApi.Data.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "476fc487-e24d-49c9-b1b2-28654e5f2ed3",
+                            ConcurrencyStamp = "bfcfb2b3-41e8-4bb6-baf1-c78f9199ad69",
                             Email = "hasimovtabriz@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Tabriz ",
@@ -254,11 +251,11 @@ namespace HuquqApi.Data.Migrations
                             MonthlyQuestionCount = 0,
                             NormalizedEmail = "HASIMOVTABRIZ@GMAIL.COM",
                             NormalizedUserName = "ADMINUSER",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIZGd7ad62U2NYv//oyq2L27d+oH0Knxd9w7hJpckkkF6+uYbzh8SnRUCq1l9YQulg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELwzHCLMCvjZFtZZT9dx55sN0NfHEYP4Lx1021/4N9PfWwSQpSYTnm4jH6l9ufPajQ==",
                             PhoneNumberConfirmed = false,
                             RequestCount = 0,
                             RequestCountTime = 0,
-                            SecurityStamp = "d5b065be-131a-4f72-b7c2-31dcac1c80ca",
+                            SecurityStamp = "775dfe53-8715-4693-b2e4-b881bc5e9c77",
                             TwoFactorEnabled = false,
                             UserName = "tabriz"
                         },
@@ -266,7 +263,7 @@ namespace HuquqApi.Data.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "48b7b6a8-3f92-4e65-a1e8-8a33e9caab02",
+                            ConcurrencyStamp = "363fc393-231b-4f61-b924-f42b9355cf3d",
                             Email = "tebitebo2001@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Admin",
@@ -277,11 +274,11 @@ namespace HuquqApi.Data.Migrations
                             MonthlyQuestionCount = 0,
                             NormalizedEmail = "TEBITEBO2001@GMAIL.COM",
                             NormalizedUserName = "ADMINUSER1",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJ78aacWB1P35l3gSqXXiIwvPPARq0DL38dlb29EJwr/CZ48wPKe3H5EvrxlFmgulw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELM4Qbwdm5/y+E+WJ86x2AanzaAjqyxD+Pgpjt/fpj6haWphMKkolTzb7CsFihiTWg==",
                             PhoneNumberConfirmed = false,
                             RequestCount = 0,
                             RequestCountTime = 0,
-                            SecurityStamp = "7c516694-005c-4dfd-90c1-ddd8f08a609b",
+                            SecurityStamp = "e2ee311b-2678-46ec-bef3-cdd3e2b71e95",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
